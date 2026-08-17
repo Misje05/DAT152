@@ -1,2 +1,3 @@
 # DAT152
-Fag på HVL
+
+Dette er et fag jeg har på Hvl i 5 semester. 

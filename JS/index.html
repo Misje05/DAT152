@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Min første JavaScript-app</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="card">
+        <p class="eyebrow">Super basic JavaScript</p>
+        <h1>Hei! Dette er en enkel start.</h1>
+        <p class="lead">
+          Trykk på knappen for å øke telleren, eller skriv inn navnet ditt for å se en liten hilsen.
+        </p>
+
+        <div class="counter">
+          <span id="count">0</span>
+          <button id="incrementBtn" type="button">Øk teller</button>
+        </div>
+
+        <label class="input-group" for="nameInput">
+          <span>Navn</span>
+          <input id="nameInput" type="text" placeholder="Skriv navnet ditt her" />
+        </label>
+
+        <p id="greeting" class="greeting">Skriv noe i feltet over.</p>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
