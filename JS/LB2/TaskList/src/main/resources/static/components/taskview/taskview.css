@@ -1,0 +1,21 @@
+h1 {
+    margin-bottom: 5px;
+}
+
+#message {
+    min-height: 1.2em;
+    color: #444;
+}
+
+#newtask {
+    margin: 10px 0 15px 0;
+}
+
+#newtask button {
+    cursor: pointer;
+}
+
+#newtask button:disabled {
+    color: #aaa;
+    cursor: default;
+}

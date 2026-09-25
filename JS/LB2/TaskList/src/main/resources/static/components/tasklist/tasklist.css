@@ -1,0 +1,38 @@
+table {
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+thead,
+tbody {
+    border-bottom: 2px solid black;
+}
+
+th:first-child,
+td:first-child {
+    padding-left: 0px;
+}
+
+th,
+td {
+    padding-left: 20px;
+    text-align: left;
+}
+
+tr:first-child>th,
+tr:first-child>td {
+    padding-top: 0px;
+}
+
+select,
+button {
+    margin: 5px 0 5px 0;
+    background-color: #e0e0e0;
+    border: 1px solid #999;
+    border-radius: 4px;
+}
+
+select:hover,
+button:hover {
+    background-color: #d0d0d0;
+}
