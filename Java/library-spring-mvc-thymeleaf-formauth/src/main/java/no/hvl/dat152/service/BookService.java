@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import no.hvl.dat152.exceptions.BookNotFoundException;
@@ -74,20 +76,12 @@ public class BookService {
 		return book;
 	}
 	
-	/**
-	 * TODO
-	 * @param id
-	 * @throws BookNotFoundException
-	 */
 	public void deleteBookById(long id) throws BookNotFoundException {
 		
-		if (!bookRepository.existsById(id)) {
-			throw new BookNotFoundException("Book with id = " + id + " not found!");
-		}
+		findBookById(id);
+		
+		bookRepository.deleteById(id);
 
-		Book book = findBookById(id);
-
-		bookRepository.delete(book);
 	}
 	
 	private Book findBookById(long id) throws BookNotFoundException {
@@ -96,5 +90,15 @@ public class BookService {
 				.orElseThrow(() -> new BookNotFoundException("Book with id = "+id+" not found!"));
 		
 		return book;
+	}
+	
+	public void whoIsAuthenticated() {
+		
+		SecurityContext securityContext = SecurityContextHolder.getContext();
+		String username = securityContext.getAuthentication().getName();
+		String roles = securityContext.getAuthentication().getAuthorities().toString();
+		System.out.println("BookService accessed by user: " + username);
+		System.out.println("Roles: " + roles);
+
 	}
 }

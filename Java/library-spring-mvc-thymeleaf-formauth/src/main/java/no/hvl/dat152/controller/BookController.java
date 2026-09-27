@@ -1,9 +1,12 @@
+/**
+ * 
+ */
 package no.hvl.dat152.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +43,9 @@ public class BookController {
 		List<Book> books = (List<Book>) bookService.findAll();
 		model.addAttribute("books", books);
 		
+		// who is authenticated?
+		bookService.whoIsAuthenticated();
+		
 		return "viewbooks";
 	}
 		
@@ -53,7 +59,6 @@ public class BookController {
 	}
 	
 	@GetMapping("/addbook")
-	@PreAuthorize("hasRole('ADMIN')")
 	public String create(Model model) {
 		
 		List<Author> authors = authorService.findAll();
@@ -63,7 +68,6 @@ public class BookController {
 	}
 	
 	@PostMapping("/addbook")
-	@PreAuthorize("hasRole('ADMIN')")
 	public String create(@RequestParam String isbn, @RequestParam String title,
 			@RequestParam int authorid) {
 		
@@ -75,21 +79,18 @@ public class BookController {
 		return "redirect:viewbooks";
 	}
 	
-	// TODO - deleteBook()
 	@GetMapping("/deletebook")
-	@PreAuthorize("hasRole('ADMIN')")
-	public String deleteBook(@RequestParam Long id, Model model) throws BookNotFoundException {
-
+	public String delete(@RequestParam Long id, Model model) throws BookNotFoundException {
+		
 		bookService.deleteBookById(id);
-		List<Book> books = bookService.findAll();
+		
+		List<Book> books = (List<Book>) bookService.findAll();
 		model.addAttribute("books", books);
-
+		
 		return "viewbooks";
 	}
-
 	
 	@GetMapping("/updatebook")
-	@PreAuthorize("hasRole('ADMIN')")
 	public String updateBook(@RequestParam Long id, Model model) throws BookNotFoundException {
 
 		Book book = bookService.findById(id);
@@ -101,7 +102,6 @@ public class BookController {
 	}
 	
 	@PostMapping("/updatebook")
-	@PreAuthorize("hasRole('ADMIN')")
 	public String updateBook(@RequestParam String isbn, 
 			@RequestParam String title,
 			@RequestParam String authorid,

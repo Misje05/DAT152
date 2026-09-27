@@ -5,8 +5,8 @@ package no.hvl.dat152.controller;
 
 
 import no.hvl.dat152.model.Author;
-import no.hvl.dat152.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +27,14 @@ public class AuthorController {
     private AuthorService authorService;
 
     @GetMapping("/addauthor")
+    @PreAuthorize("hasRole('ADMIN')")
     public String create(Model model) {
 
         return "addauthor";
     }
 
     @PostMapping("/addauthor")
+    @PreAuthorize("hasRole('ADMIN')")
     public String create(@RequestParam String firstname, @RequestParam String lastname) {
 
         Author author = new Author(firstname, lastname);

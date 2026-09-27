@@ -3,16 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <title>View All Books</title>
+<link rel="stylesheet" type="text/css" media="all" href="/css/styles.css" th:href="@{/css/styles.css}" />
 </head>
 <body>
+<main class="container">
 	<div>
 		<a href="/">Home</a>
 	</div>
-	<div th:if="${not #lists.isEmpty(books)}">
-		<table border=1 class="">
+	<div>
+		<table>
 			<tr>
 				<th>ISBN</th>
 				<th>Title</th>
+				<th></th>
+				<th></th>
+				<th></th>
 			</tr>
 			<tr th:each="book : ${books}">
 				<td th:text="${book.isbn}"></td>
@@ -29,7 +34,6 @@
 			</tr>
 		</table>
 	</div>
-
-	<p th:if="${#lists.isEmpty(books)}">Ingen bøker funnet. </p>
+</main>
 </body>
 </html>
